@@ -15,8 +15,13 @@ int main(void)
 
 	while (1)
 	{
-		print_s(PROMPT);
+		if (INTERACTIVE_MODE)
+		{
+			print_s(PROMPT);
+		}
 		user_command = read_input();
+
+		remove_comments_spaces(user_command);
 
 		tokenized = tokenize_input(user_command);
 
