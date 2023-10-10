@@ -20,19 +20,19 @@ void execute_env(char **argv)
 	}
 }
 /**
- * _exit - function that exits the shell
+ * shell_exit - function that exits the shell
  * @argv: the arguments to be passed
  * Return: none
  */
 void shell_exit(char **argv)
 {
 	/** parsing the args */
-	char *cmd = argv[0];
+	char *command = argv[0];
 	char *exit_code = argv[1];
 	int exit_status;
 
 	/* is the first argument exit */
-	if (_strcmp(cmd, "exit") != 0)
+	if (_strcmp(command, "exit") != 0)
 	{
 		return;
 	}
@@ -62,17 +62,16 @@ int change_directory(const char *new_dir)
 
 /**
  * execute_cd - function to execute the change dir command
- * @argv: the args
- * @argc: the count of args
+ * @argv: the command cd
  *
  * Return: None
  */
-void execute_cd(char *argv[], int argc)
+void execute_cd(char **argv)
 {
 	const char *new_dir;
 	char *current_dir;
 
-	if (argc == 1 || strcmp(argv[1], "~") == 0)
+	if (argv[1] == NULL || strcmp(argv[1], "~") == 0)
 	{
 		new_dir = getenv("HOME");
 	}
@@ -90,7 +89,6 @@ void execute_cd(char *argv[], int argc)
 	if (current_dir == NULL)
 	{
 		perror("getcwd");
-		free(current_dir);
 		return;
 	}
 

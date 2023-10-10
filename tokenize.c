@@ -58,5 +58,6 @@ char **tokenize_input(char *input)
 		token = strtok(NULL, " \n\t\r");
 	}
 	cmd[i] = NULL;
+
 	return (cmd);
 }

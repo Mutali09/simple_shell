@@ -7,8 +7,8 @@
 */
 int execute(const char *cmd)
 {
-	char *full_path;
 	int status;
+	char *full_path, **args = NULL;
 
 	if (is_full_path(cmd))
 	{
@@ -16,14 +16,9 @@ int execute(const char *cmd)
 		if (full_path == NULL)
 		{
 			perror("strdup error");
+			free(args);
 			return (EXIT_FAILURE);
 		}
-
-		char *const args[] = {full_path, NULL};
-
-		status = execute_command(full_path, args);
-		free(full_path);
-		return (status);
 	}
 	else
 	{
@@ -33,16 +28,24 @@ int execute(const char *cmd)
 
 		if (full_path == NULL)
 		{
-			print_error("Command not found: %s\n", cmd);
+			print_error("Command not found");
+			free(args);
 			return (EXIT_FAILURE);
 		}
-		char *const args[] = {full_path, NULL};
-
-		status = execute_command(full_path, args);
-
-		free(full_path);
-		return (status);
 	}
+	args = (char **)malloc(2 * sizeof(char *));
+	if (args == NULL)
+	{
+		perror("malloc error"), free(full_path);
+		return (EXIT_FAILURE);
+	}
+
+	args[0] = full_path;
+	args[1] = NULL;
+
+	status = execute_command(full_path, args);
+	free(full_path), free(args);
+	return (status);
 }
 /**
  * is_full_path - function to check whether the command if full_path
@@ -75,10 +78,10 @@ int execute_builtin(const char *cmd)
 		if (strcmp(cmd, builtins[i].name) == 0)
 		{
 			builtins[i].function(NULL);
-			return (1);
+			return (0);
 		}
 	}
-	return (0);
+	return (1);
 }
 /**
  * execute_command - function to execute commands using a child process
@@ -119,6 +122,7 @@ int execute_command(const char *full_path, char *const args[])
 			return (EXIT_FAILURE);
 		}
 	}
+	return (EXIT_FAILURE);
 }
 
 /**
@@ -138,7 +142,7 @@ int execute_cmds(char **tokens)
 
 		if (status != 0)
 		{
-			print_error("Command '%s' failed with status %d\n", tokens[i], status);
+			print_error("Command failed");
 			return (1);
 		}
 	}

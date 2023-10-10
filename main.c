@@ -6,7 +6,7 @@
 int main(void)
 {
 	char *user_command;
-	char **tokens;
+	char **tokenized;
 
 	signal(SIGINT, get_sig);
 	signal(SIGQUIT, get_quit);
@@ -18,13 +18,13 @@ int main(void)
 		print_s(PROMPT);
 		user_command = read_input();
 
-		tokens = tokenize_input(user_command);
+		tokenized = tokenize_input(user_command);
 
-		if (tokens != NULL && tokens[0] != NULL)
+		if (tokenized != NULL && tokenized[0] != NULL)
 		{
-			execute_cmds(tokens);
+			execute_cmds(tokenized);
 
-			free(tokens);
+			free(tokenized);
 		}
 		free(user_command);
 	}

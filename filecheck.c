@@ -11,9 +11,9 @@ int file_exists(const char *path)
 
 	if (stat(path, &st) == 0)
 	{
-		return (0); /* File Exists*/
+		return (1); /* File Exists*/
 	}
-	return (1); /* Failure */
+	return (0); /* Failure */
 }
 
 /**
@@ -28,7 +28,7 @@ int is_executable(const char *path)
 
 	if (stat(path, &st) == 0 && (st.st_mode & S_IXUSR))
 	{
-		return (0);/* is executable */
+		return (1);/* is executable */
 	}
-	return (1); /* is not executable */
+	return (0); /* is not executable */
 }
