@@ -24,7 +24,7 @@ void execute_env(char **argv)
  * @argv: the arguments to be passed
  * Return: none
  */
-void _exit(char **argv)
+void shell_exit(char **argv)
 {
 	/** parsing the args */
 	char *cmd = argv[0];
