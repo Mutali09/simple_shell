@@ -5,14 +5,14 @@
  *
  * Return: status of the exectution
 */
-int execute(const char *cmd)
+int execute(char *const cmd[])
 {
 	int status;
-	char *full_path, **args = NULL;
+	char *full_path;
 
-	if (is_full_path(cmd))
+	if (is_full_path(cmd[0]))
 	{
-		full_path = strdup(cmd);
+		full_path = strdup(cmd[0]);
 		if (full_path == NULL)
 		{
 			perror("strdup error");
@@ -21,11 +21,11 @@ int execute(const char *cmd)
 	}
 	else
 	{
-		if (execute_builtin(cmd) == 0)
+		if (execute_builtin(cmd[0]) == 0)
 		{
 			return (0);
 		}
-		full_path = _which(cmd);
+		full_path = _which(cmd[0]);
 
 		if (full_path == NULL)
 		{
@@ -33,18 +33,9 @@ int execute(const char *cmd)
 			return (EXIT_FAILURE);
 		}
 	}
-	args = (char **)malloc(2 * sizeof(char *));
-	if (args == NULL)
-	{
-		perror("malloc error"), free(full_path);
-		return (EXIT_FAILURE);
-	}
 
-	args[0] = full_path;
-	args[1] = NULL;
-
-	status = execute_command(full_path, args);
-	free(full_path), free(args);
+	status = execute_command(full_path, (char *const*)cmd);
+	free(full_path);
 	return (status);
 }
 /**
@@ -124,28 +115,3 @@ int execute_command(const char *full_path, char *const args[])
 	}
 	return (EXIT_FAILURE);
 }
-
-/**
- * execute_cmds - function to execute an array of commands
- * @tokens: array of commands
- *
- * Return: 0 for success and 1 for failure
-*/
-int execute_cmds(char **tokens)
-{
-	int i = 0;
-	int status;
-
-	for (; tokens[i] != NULL; i++)
-	{
-		status = execute(tokens[i]);
-
-		if (status != 0)
-		{
-			print_error("Command failed");
-			return (1);
-		}
-	}
-	return (0);
-}
-

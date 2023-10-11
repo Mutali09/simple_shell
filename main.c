@@ -34,7 +34,7 @@ int main(void)
 			}
 			else
 			{
-			execute_cmds(cmd);
+			execute(cmd);
 			manual_free(cmd), free(result);
 			}
 		}

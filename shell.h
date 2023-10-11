@@ -39,11 +39,10 @@ typedef struct builtin_command
 
 
 /* execute.c */
-int execute(const char *cmd);
+int execute(char *const cmd[]);
 int is_full_path(const char *cmd);
 int execute_command(const char *full_path, char *const args[]);
 int execute_builtin(const char *cmd);
-int execute_cmds(char **tokens);
 
 /* filecheck.c */
 int file_exists(const char *path);
