@@ -5,10 +5,9 @@
  */
 int main(void)
 {
-	char *user_command, *result;
-	char **tokenized;
+	char *input, *result, **cmd;
 
-	/* signal(SIGINT, get_sig); */
+	signal(SIGINT, get_sig);
 	signal(SIGQUIT, get_quit);
 
 	determine_mode();
@@ -19,20 +18,27 @@ int main(void)
 		{
 			print_s(PROMPT);
 		}
-		user_command = read_input();
+		fflush(stdout);
+		input = read_input();
 
-		result = remove_comments_spaces(user_command);
+		result = remove_comments_spaces(input);
 
-		tokenized = tokenize_input(result);
+		cmd = tokenize_input(result);
 
-		if (tokenized != NULL && tokenized[0] != NULL)
+		if (cmd != NULL && cmd[0] != NULL)
 		{
-			execute_cmds(tokenized);
-
-			free(tokenized);
+			if (is_builtin(cmd[0]))
+			{
+				execute_builtin(cmd[0]);
+				manual_free(cmd), free(result);
+			}
+			else
+			{
+			execute_cmds(cmd);
+			manual_free(cmd), free(result);
+			}
 		}
-		free(user_command);
-		free(result);
+		free(input);
 	}
 
 	return (0);

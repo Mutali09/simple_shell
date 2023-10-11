@@ -26,33 +26,8 @@ void execute_env(char **argv)
  */
 void shell_exit(char **argv)
 {
-	/** parsing the args */
-	char *command;
-	char *exit_code;
-	int exit_status = 0;
-
-	if (argv == NULL || argv[0] == NULL)
-	{
-		return;
-	}
-	/* is the first argument exit */
-	if (argv[0] != NULL)
-	{
-		if (strcmp(argv[0], "exit") != 0)
-		{
-			return;
-		}
-		command = argv[0];
-	}
-	if (argv[1] != NULL)
-	{
-		exit_code = argv[1];
-	}
-	if (exit_code != NULL)
-	{
-		exit_status = atoi(exit_code);
-	}
-	exit(exit_status);
+	UNUSED(argv);
+	 exit(0);
 }
 /**
  * change_directory - function to change the current directory

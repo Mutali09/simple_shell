@@ -16,7 +16,6 @@ int execute(const char *cmd)
 		if (full_path == NULL)
 		{
 			perror("strdup error");
-			free(args);
 			return (EXIT_FAILURE);
 		}
 	}
@@ -24,7 +23,6 @@ int execute(const char *cmd)
 	{
 		if (execute_builtin(cmd) == 0)
 		{
-			free(args);
 			return (0);
 		}
 		full_path = _which(cmd);
@@ -32,7 +30,6 @@ int execute(const char *cmd)
 		if (full_path == NULL)
 		{
 			print_error("Full_path null: Command not found");
-			free(args);
 			return (EXIT_FAILURE);
 		}
 	}

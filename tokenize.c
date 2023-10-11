@@ -50,28 +50,38 @@ char **tokenize_input(char *input)
 	char *token = NULL;
 	size_t i = 0;
 	int size = 0;
+	char *input_copy = strdup(input);
 
-	if (input == NULL)
-		return (NULL);
-
-	for (i = 0; input[i]; i++)
+	if (input_copy == NULL)
 	{
-		if (input[i] == ' ')
+		return (NULL);
+	}
+	for (i = 0; input_copy[i]; i++)
+	{
+		if (input_copy[i] == ' ')
 			size++;
 	}
-	if ((size + 1) == _strlen(input))
-		return (NULL);
+
 	cmd = malloc(sizeof(char *) * (size + 2));
 	if (cmd == NULL)
+	{
+		free(input_copy);
 		return (NULL);
-
-	token = strtok(input, " \n\t\r");
+	}
+	token = strtok(input_copy, " \n\t\r");
 	for (i = 0; token != NULL; i++)
 	{
-		cmd[i] = token;
+		cmd[i] = strdup(token);
+		if (cmd[i] == NULL)
+		{
+			manual_free(cmd);
+			free(input_copy);
+			return (NULL);
+		}
 		token = strtok(NULL, " \n\t\r");
 	}
 	cmd[i] = NULL;
 
+	free(input_copy);
 	return (cmd);
 }

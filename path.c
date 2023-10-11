@@ -13,7 +13,7 @@ char *_which(const char *cmd)
 	cwd = getcwd(NULL, 0);
 	if (cwd != NULL)
 	{
-		full_cwd = malloc(strlen(cwd) + strlen(cmd) + 2);
+		full_cwd = malloc(strlen(cwd) + 1 + strlen(cmd) + 2);
 
 		if (full_cwd == NULL)
 		{
@@ -28,12 +28,12 @@ char *_which(const char *cmd)
 			free(cwd);
 			return (full_cwd);
 		}
-		free(full_cwd);
+		free(full_cwd), free(cwd);
 	}
 	tokens = tokenize_path(getenv("PATH"));
 	for (i = 0; tokens[i] != NULL; i++)
 	{
-		full_path = malloc(strlen(tokens[i]) + strlen(cmd) + 2);
+		full_path = malloc(strlen(tokens[i]) + 1 + strlen(cmd) + 2);
 
 		strcpy(full_path, tokens[i]);
 		strcat(full_path, "/");

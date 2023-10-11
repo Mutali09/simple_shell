@@ -90,6 +90,10 @@ int _strlen(const char *s);
 char **tokenize_path(const char *path);
 char **tokenize_input(char *input);
 
+/* utils.c */
+
+void manual_free(char **str);
+int is_builtin(const char *cmd);
 
 
 #endif /* SHELL_H */
