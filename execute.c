@@ -23,12 +23,15 @@ int execute(const char *cmd)
 	else
 	{
 		if (execute_builtin(cmd) == 0)
+		{
+			free(args);
 			return (0);
+		}
 		full_path = _which(cmd);
 
 		if (full_path == NULL)
 		{
-			print_error("Command not found");
+			print_error("Full_path null: Command not found");
 			free(args);
 			return (EXIT_FAILURE);
 		}

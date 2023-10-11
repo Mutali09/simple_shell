@@ -8,9 +8,25 @@
 char **tokenize_path(const char *path)
 {
 	char **tokens, *token;
-	int i = 0;
+	const char *ptr;
+	int i = 0, count = 0;
 
-	tokens = malloc(sizeof(char *) * 10);
+	for (ptr = path; *ptr != '\0'; ++ptr)
+	{
+		if (*ptr == ':')
+		{
+			count++;
+		}
+	}
+
+	tokens = malloc((count + 2) * sizeof(char *));
+
+	if (tokens == NULL)
+	{
+		perror("malloc error");
+		return (NULL);
+	}
+
 	token = strtok((char *)path, ":");
 
 	while (token != NULL)
@@ -19,8 +35,6 @@ char **tokenize_path(const char *path)
 		token = strtok(NULL, ":");
 	}
 	tokens[i] = NULL;
-
-	free(token);
 
 	return (tokens);
 }

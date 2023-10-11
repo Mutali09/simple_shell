@@ -5,10 +5,10 @@
  */
 int main(void)
 {
-	char *user_command;
+	char *user_command, *result;
 	char **tokenized;
 
-	signal(SIGINT, get_sig);
+	/* signal(SIGINT, get_sig); */
 	signal(SIGQUIT, get_quit);
 
 	determine_mode();
@@ -21,9 +21,9 @@ int main(void)
 		}
 		user_command = read_input();
 
-		remove_comments_spaces(user_command);
+		result = remove_comments_spaces(user_command);
 
-		tokenized = tokenize_input(user_command);
+		tokenized = tokenize_input(result);
 
 		if (tokenized != NULL && tokenized[0] != NULL)
 		{
@@ -32,6 +32,7 @@ int main(void)
 			free(tokenized);
 		}
 		free(user_command);
+		free(result);
 	}
 
 	return (0);
