@@ -17,7 +17,6 @@ int main(void)
 	{
 		if (mode == INTERACTIVE_MODE)
 		{
-			printf("Interactive Mode\n");
 			print_s(PROMPT);
 			fflush(stdout);
 		}
