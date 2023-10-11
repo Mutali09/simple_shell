@@ -6,19 +6,21 @@
 int main(void)
 {
 	char *input, *result, **cmd;
+	int mode;
 
 	signal(SIGINT, get_sig);
 	signal(SIGQUIT, get_quit);
 
-	determine_mode();
+	mode = determine_mode();
 
 	while (1)
 	{
-		if (INTERACTIVE_MODE)
+		if (mode == INTERACTIVE_MODE)
 		{
+			printf("Interactive Mode\n");
 			print_s(PROMPT);
+			fflush(stdout);
 		}
-		fflush(stdout);
 		input = read_input();
 
 		result = remove_comments_spaces(input);

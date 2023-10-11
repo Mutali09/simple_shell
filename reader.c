@@ -9,12 +9,13 @@ char *read_input(void)
 	char *input = NULL;
 	size_t input_size = 0;
 	ssize_t input_len;
+	int mode = determine_mode();
 
 	input_len = getline(&input, &input_size, stdin);
 
 	if (input_len == -1) /*Handling EOF here*/
 	{
-		if (INTERACTIVE_MODE)
+		if (mode == INTERACTIVE_MODE)
 		{
 			write(STDERR_FILENO, "\n", 1);
 			free(input);

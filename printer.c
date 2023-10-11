@@ -23,6 +23,7 @@ int print_s(char *str)
 	while (str[i] != '\0')
 	{
 		_putchar(str[i]);
+		printf("print");
 		i++;
 	}
 

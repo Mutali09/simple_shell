@@ -30,12 +30,5 @@ void get_quit(int sig)
  */
 int determine_mode(void)
 {
-	if (isatty(STDIN_FILENO))
-	{
-		return (INTERACTIVE_MODE);
-	}
-	else
-	{
-		return (NON_INTERACTIVE_MODE);
-	}
+	return (isatty(STDIN_FILENO) ? INTERACTIVE_MODE : NON_INTERACTIVE_MODE);
 }
