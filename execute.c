@@ -8,7 +8,7 @@
 int execute(char *const cmd[])
 {
 	int status;
-	char *full_path;
+	char *full_path = NULL;
 
 	if (is_full_path(cmd[0]))
 	{
@@ -25,6 +25,9 @@ int execute(char *const cmd[])
 		{
 			return (0);
 		}
+		free(full_path);
+		
+		printf("execute_CMD: %s\n", cmd[0]);
 		full_path = _which(cmd[0]);
 
 		if (full_path == NULL)

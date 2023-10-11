@@ -7,11 +7,17 @@
 */
 char **tokenize_path(const char *path)
 {
-	char **tokens, *token;
+	char **tokens, *token, *path_copy = NULL;
 	const char *ptr;
 	int i = 0, count = 0;
 
-	for (ptr = path; *ptr != '\0'; ++ptr)
+	path_copy = strdup(path);
+	if (path_copy == NULL)
+	{
+		return (NULL);
+	}
+
+	for (ptr = path_copy; *ptr != '\0'; ++ptr)
 	{
 		if (*ptr == ':')
 		{
@@ -24,10 +30,11 @@ char **tokenize_path(const char *path)
 	if (tokens == NULL)
 	{
 		perror("malloc error");
+		free(path_copy);
 		return (NULL);
 	}
 
-	token = strtok((char *)path, ":");
+	token = strtok((char *)path_copy, ":");
 
 	while (token != NULL)
 	{
@@ -35,7 +42,7 @@ char **tokenize_path(const char *path)
 		token = strtok(NULL, ":");
 	}
 	tokens[i] = NULL;
-
+	/* free(path_copy); */
 	return (tokens);
 }
 /**
