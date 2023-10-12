@@ -21,8 +21,8 @@ char *_which(const char *cmd)
 			return (NULL);
 		}
 		_strcpy(full_cwd, cwd);
-		strcat(full_cwd, "/");
-		strcat(full_cwd, cmd);
+		_strcat(full_cwd, "/");
+		_strcat(full_cwd, cmd);
 		if (file_exists(full_cwd) && is_executable(full_cwd))
 		{
 			free(cwd);
@@ -40,8 +40,8 @@ char *_which(const char *cmd)
 			return (NULL);
 		}
 		_strcpy(full_path, tokens[i]);
-		strcat(full_path, "/");
-		strcat(full_path, cmd);
+		_strcat(full_path, "/");
+		_strcat(full_path, cmd);
 		if (file_exists(full_path) && is_executable(full_path))
 		{
 			free(tokens);

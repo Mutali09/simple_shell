@@ -56,3 +56,28 @@ int str_cmp(const char *str1, const char *str2, size_t n)
 	}
 	return (0);
 }
+/**
+ * *_strcat - function to concatenate two strings
+ * @dest: the destination string
+ * @src: the source string
+ * 
+ * Return: a pointer to the destination string
+*/
+char *_strcat(char *dest, const char *src)
+{
+	int index_dest = 0;
+	int index_src = 0;
+
+	while (dest[index_dest] != '\0')
+	{
+		index_dest++;
+	}
+	while (src[index_src] != '\0')
+	{
+		dest[index_dest] = src[index_src];
+		index_dest++;
+		index_src++;
+	}
+	dest[index_dest] = '\0';
+	return (dest);
+}

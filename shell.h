@@ -78,6 +78,7 @@ int determine_mode(void);
 /* string.c */
 int _atoi(char *s);
 int str_cmp(const char *str1, const char *str2, size_t n);
+char *_strcat(char *dest, const char *src);
 
 /* strings.c */
 char *_strchr(const char *s, int c);
