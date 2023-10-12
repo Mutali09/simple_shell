@@ -83,7 +83,7 @@ char *remove_spaces(const char *str)
 
 	if (trimmed)
 	{
-		strncpy(trimmed, str, len);
+		str_cpy(trimmed, str, len);
 		trimmed[len] = '\0';
 	}
 	return (trimmed);

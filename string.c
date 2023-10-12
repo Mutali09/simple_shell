@@ -81,3 +81,27 @@ char *_strcat(char *dest, const char *src)
 	dest[index_dest] = '\0';
 	return (dest);
 }
+/**
+ * str_cpy - function to copy a string
+ * @dest: the destination string
+ * @src: the source string
+ * @n: limiter for the number of characters to copy
+ * 
+ * Return: a pointer to the copied string
+*/
+char *str_cpy(char *dest, const char *src, size_t n)
+{
+	size_t i = 0;
+
+	while(src[i] != '\0' && i < n)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
+}
