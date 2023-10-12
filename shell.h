@@ -32,7 +32,7 @@ extern char **environ; /* to help us access the env variables */
 typedef struct builtin_command
 {
 	const char *name;
-	void (*function)(char **argv);
+	void (*function)(char *const cmd[]);
 } builtin_command;
 
 
@@ -42,17 +42,17 @@ typedef struct builtin_command
 int execute(char *const cmd[], const char *shell_name);
 int is_full_path(const char *cmd);
 int execute_command(const char *full_path, char *const args[]);
-int execute_builtin(const char *cmd);
+int execute_builtin(char *const cmd[]);
 
 /* filecheck.c */
 int file_exists(const char *path);
 int is_executable(const char *path);
 
 /* inhouse.c */
-void execute_env(char **argv);
-void shell_exit(char **argv);
+void execute_env(char *const cmd[]);
+void shell_exit(char *const cmd[]);
 int change_directory(const char *new_dir);
-void execute_cd(char **argv);
+void execute_cd(char *const cmd[]);
 void update_env_variables(const char *old_dir, const char *new_dir);
 
 /* path.c */

@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 		{
 			if (is_builtin(cmd[0]))
 			{
-				execute_builtin(cmd[0]);
+				execute_builtin(cmd);
 				manual_free(cmd), free(result);
 			}
 			else

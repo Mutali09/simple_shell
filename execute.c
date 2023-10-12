@@ -21,7 +21,7 @@ int execute(char *const cmd[], const char *shell_name)
 	}
 	else
 	{
-		if (execute_builtin(cmd[0]) == 0)
+		if (execute_builtin(cmd) == 0)
 		{
 			return (0);
 		}
@@ -61,7 +61,7 @@ int is_full_path(const char *cmd)
  *
  * Return: 1 to indicate builtin command execution or 0 for non_builtin
 */
-int execute_builtin(const char *cmd)
+int execute_builtin(char *const cmd[])
 {
 	int i = 0;
 	const builtin_command builtins[] = {
@@ -73,9 +73,9 @@ int execute_builtin(const char *cmd)
 
 	for (; builtins[i].name != NULL; ++i)
 	{
-		if (_strcmp(cmd, builtins[i].name) == 0)
+		if (_strcmp(cmd[0], builtins[i].name) == 0)
 		{
-			builtins[i].function(NULL);
+			builtins[i].function(cmd);
 			return (0);
 		}
 	}

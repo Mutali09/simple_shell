@@ -4,11 +4,11 @@
  * @argv: included to match the struct. Not used for this function
  * Return: none
  */
-void execute_env(char **argv)
+void execute_env(char *const cmd[])
 {
 	char **env;
 
-	UNUSED(argv);
+	UNUSED(cmd);
 
 	env = environ;
 
@@ -24,10 +24,20 @@ void execute_env(char **argv)
  * @argv: the arguments to be passed
  * Return: none
  */
-void shell_exit(char **argv)
+void shell_exit(char *const cmd[])
 {
-	UNUSED(argv);
-	 exit(0);
+	int status;
+
+	if (cmd[1] != NULL)
+	{
+		status = _atoi(cmd[1]);
+
+		exit(status);
+	}
+	else
+	{
+		exit(0);
+	}
 }
 /**
  * change_directory - function to change the current directory
@@ -51,22 +61,22 @@ int change_directory(const char *new_dir)
  *
  * Return: None
  */
-void execute_cd(char **argv)
+void execute_cd(char *const cmd[])
 {
 	const char *new_dir;
 	char *current_dir;
 
-	if (argv[1] == NULL || _strcmp(argv[1], "~") == 0)
+	if (cmd[1] == NULL || _strcmp(cmd[1], "~") == 0)
 	{
 		new_dir = get_env("HOME");
 	}
-	else if (_strcmp(argv[1], "-") == 0)
+	else if (_strcmp(cmd[1], "-") == 0)
 	{
 		new_dir = get_env("OLDPWD");
 	}
 	else
 	{
-		new_dir = argv[1];
+		new_dir = cmd[1];
 	}
 
 	current_dir = getcwd(NULL, 0);
