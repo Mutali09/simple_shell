@@ -1,6 +1,8 @@
 #include "shell.h"
 /**
  * main - this is the main function
+ * @argc: count of args
+ * @argv: the arguments
  * Return: Always 0 for success
  */
 int main(int argc, char *argv[])

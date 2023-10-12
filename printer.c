@@ -40,9 +40,9 @@ void print_error(const char *message)
 	write(STDERR_FILENO, "\n", 1);
 }
 /**
- * print_error - function to print a custom message
+ * print_err - function to print a custom message
  * @message: the message to be printed
- * 
+ *
  * Return: none
 */
 void print_err(const char *message)

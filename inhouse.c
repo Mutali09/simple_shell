@@ -1,7 +1,7 @@
 #include "shell.h"
 /**
  * execute_env - function to execute the env command from the stdin
- * @argv: included to match the struct. Not used for this function
+ * @cmd: included to match the struct. Not used for this function
  * Return: none
  */
 void execute_env(char *const cmd[])
@@ -21,7 +21,7 @@ void execute_env(char *const cmd[])
 }
 /**
  * shell_exit - function that exits the shell
- * @argv: the arguments to be passed
+ * @cmd: the arguments to be passed
  * Return: none
  */
 void shell_exit(char *const cmd[])
@@ -57,7 +57,7 @@ int change_directory(const char *new_dir)
 
 /**
  * execute_cd - function to execute the change dir command
- * @argv: the command cd
+ * @cmd: the command cd
  *
  * Return: None
  */

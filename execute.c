@@ -2,7 +2,7 @@
 /**
  * execute - function to check if full_path, builtin, or single command
  * @cmd: the command to execute (both full_path and a single command)
- *
+ * @shell_name: the name of the shell
  * Return: status of the exectution
 */
 int execute(char *const cmd[], const char *shell_name)
@@ -34,7 +34,7 @@ int execute(char *const cmd[], const char *shell_name)
 			if (mode == INTERACTIVE_MODE)
 			{
 				print_err(shell_name), print_err(": No such file or directory\n");
-				return(EXIT_FAILURE);
+				return (EXIT_FAILURE);
 			}
 			print_err(shell_name), print_err(": 1: ");
 			print_err(cmd[0]), print_err(": "), print_err("not found\n");
