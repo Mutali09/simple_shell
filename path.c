@@ -14,15 +14,12 @@ char *_which(const char *cmd)
 	if (cwd != NULL)
 	{
 		full_cwd = malloc(_strlen(cwd) + 1 + _strlen(cmd) + 2);
-
 		if (full_cwd == NULL)
 		{
 			free(cwd);
 			return (NULL);
 		}
-		_strcpy(full_cwd, cwd);
-		_strcat(full_cwd, "/");
-		_strcat(full_cwd, cmd);
+		_strcpy(full_cwd, cwd), _strcat(full_cwd, "/"), _strcat(full_cwd, cmd);
 		if (file_exists(full_cwd) && is_executable(full_cwd))
 		{
 			free(cwd);

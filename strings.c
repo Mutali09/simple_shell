@@ -45,7 +45,7 @@ int _strcmp(const char *str1, const char *str2)
 * @src: the string to be copied
 * Return: String
 */
-char *_strcpy(char *dest, char *src)
+char *_strcpy(char *dest, const char *src)
 {
 	char *start = dest;
 

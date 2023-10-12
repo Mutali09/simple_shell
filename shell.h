@@ -84,7 +84,7 @@ char *str_cpy(char *dest, const char *src, size_t n);
 /* strings.c */
 char *_strchr(const char *s, int c);
 int _strcmp(const char *str1, const char *str2);
-char *_strcpy(char *dest, char *src);
+char *_strcpy(char *dest, const char *src);
 char *_strdup(const char *str);
 int _strlen(const char *s);
 

@@ -38,21 +38,37 @@ char *read_input(void)
  */
 char *remove_comments(const char *str)
 {
-	char *result, *comment;
+	int i = 0, j = 0;
+	char *result;
 
-	result = _strdup(str);
+	result = (char *)malloc(strlen(str) + 1);
 
 	if (!result)
-		return (NULL);
+	{
+		perror("Memory allocation failed");
+		exit(EXIT_FAILURE);
+	}
+	while (str[i] != '\0')
+	{
+		if (str[i] == '#' && (i == 0 || str[i - 1] == ' '))
+		{
+			/* Skip comments at the beginning of the line or preceded by a space */
+			while (str[i] != '\0' && str[i] != '\n')
+			{
+				i++;
+			}
+		}
+		else
+		{
+			/* Copy non-comment characters to the result string */
+			result[j++] = str[i++];
+		}
+	}
 
-	comment = _strchr(result, '#');
-
-	if (comment)
-		*comment = '\0';
+	result[j] = '\0';
 
 	return (result);
 }
-
 /**
  * remove_spaces - function to remove spaces from a str
  * @str: the string
