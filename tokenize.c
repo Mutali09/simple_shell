@@ -11,7 +11,7 @@ char **tokenize_path(const char *path)
 	const char *ptr;
 	int i = 0, count = 0;
 
-	path_copy = strdup(path);
+	path_copy = _strdup(path);
 	if (path_copy == NULL)
 	{
 		return (NULL);
@@ -58,7 +58,7 @@ char **tokenize_input(char *input)
 	char *token = NULL;
 	size_t i = 0;
 	int size = 0;
-	char *input_copy = strdup(input);
+	char *input_copy = _strdup(input);
 
 	if (input_copy == NULL)
 	{
@@ -79,7 +79,7 @@ char **tokenize_input(char *input)
 	token = strtok(input_copy, " \n\t\r");
 	for (i = 0; token != NULL; i++)
 	{
-		cmd[i] = strdup(token);
+		cmd[i] = _strdup(token);
 		if (cmd[i] == NULL)
 		{
 			manual_free(cmd);

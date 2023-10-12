@@ -12,7 +12,7 @@ int execute(char *const cmd[])
 
 	if (is_full_path(cmd[0]))
 	{
-		full_path = strdup(cmd[0]);
+		full_path = _strdup(cmd[0]);
 		if (full_path == NULL)
 		{
 			perror("strdup error");
@@ -48,7 +48,7 @@ int execute(char *const cmd[])
 */
 int is_full_path(const char *cmd)
 {
-	return (strchr(cmd, '/') != NULL);
+	return (_strchr(cmd, '/') != NULL);
 }
 /**
  * execute_builtin - function to help in the execution of builtin functions
@@ -68,7 +68,7 @@ int execute_builtin(const char *cmd)
 
 	for (; builtins[i].name != NULL; ++i)
 	{
-		if (strcmp(cmd, builtins[i].name) == 0)
+		if (_strcmp(cmd, builtins[i].name) == 0)
 		{
 			builtins[i].function(NULL);
 			return (0);

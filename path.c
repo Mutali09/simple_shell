@@ -13,14 +13,14 @@ char *_which(const char *cmd)
 	cwd = getcwd(NULL, 0);
 	if (cwd != NULL)
 	{
-		full_cwd = malloc(strlen(cwd) + 1 + strlen(cmd) + 2);
+		full_cwd = malloc(_strlen(cwd) + 1 + _strlen(cmd) + 2);
 
 		if (full_cwd == NULL)
 		{
 			free(cwd);
 			return (NULL);
 		}
-		strcpy(full_cwd, cwd);
+		_strcpy(full_cwd, cwd);
 		strcat(full_cwd, "/");
 		strcat(full_cwd, cmd);
 		if (file_exists(full_cwd) && is_executable(full_cwd))
@@ -33,13 +33,13 @@ char *_which(const char *cmd)
 	tokens = tokenize_path(get_env("PATH"));
 	for (i = 0; tokens[i] != NULL; i++)
 	{
-		full_path = malloc(strlen(tokens[i]) + 1 + strlen(cmd) + 2);
+		full_path = malloc(_strlen(tokens[i]) + 1 + _strlen(cmd) + 2);
 		if (full_path == NULL)
 		{
 			free(tokens);
 			return (NULL);
 		}
-		strcpy(full_path, tokens[i]);
+		_strcpy(full_path, tokens[i]);
 		strcat(full_path, "/");
 		strcat(full_path, cmd);
 		if (file_exists(full_path) && is_executable(full_path))

@@ -56,13 +56,13 @@ void execute_cd(char **argv)
 	const char *new_dir;
 	char *current_dir;
 
-	if (argv[1] == NULL || strcmp(argv[1], "~") == 0)
+	if (argv[1] == NULL || _strcmp(argv[1], "~") == 0)
 	{
-		new_dir = getenv("HOME");
+		new_dir = get_env("HOME");
 	}
-	else if (strcmp(argv[1], "-") == 0)
+	else if (_strcmp(argv[1], "-") == 0)
 	{
-		new_dir = getenv("OLDPWD");
+		new_dir = get_env("OLDPWD");
 	}
 	else
 	{
