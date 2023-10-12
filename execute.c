@@ -7,7 +7,7 @@
 */
 int execute(char *const cmd[], const char *shell_name)
 {
-	int status;
+	int status, mode = determine_mode();
 	char *full_path = NULL;
 
 	if (is_full_path(cmd[0]))
@@ -31,12 +31,16 @@ int execute(char *const cmd[], const char *shell_name)
 
 		if (full_path == NULL)
 		{
+			if (mode == INTERACTIVE_MODE)
+			{
+				print_err(shell_name), print_err(": No such file or directory\n");
+				return(EXIT_FAILURE);
+			}
 			print_err(shell_name), print_err(": 1: ");
 			print_err(cmd[0]), print_err(": "), print_err("not found\n");
 			return (EXIT_FAILURE);
 		}
 	}
-
 	status = execute_command(full_path, (char *const*)cmd);
 	free(full_path);
 	return (status);
