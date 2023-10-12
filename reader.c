@@ -113,14 +113,46 @@ char *remove_spaces(const char *str)
 char *remove_comments_spaces(const char *str)
 {
 	char *without_comments = remove_comments(str);
+	char *without_spaces;
 	char *result;
 
 	if (!without_comments)
 		return (NULL);
 
-	result = remove_spaces(without_comments);
+	without_spaces = remove_spaces(without_comments);
+	result = remove_quotes(without_spaces);
 
 	free(without_comments);
+	free(without_spaces);
 
+	return (result);
+}
+/**
+ * remove_quotes - function to remove quotes from a string
+ * @str: the string
+ *
+ * Return: the new string without quotes
+*/
+char *remove_quotes(const char *str)
+{
+	char *result;
+	int i = 0, j = 0;
+
+	result = (char *)malloc(strlen(str) + 1);
+
+	if (!result)
+	{
+		perror("Memory allocation failed");
+		exit(EXIT_FAILURE);
+	}
+	while (str[i] != '\0')
+	{
+		if (str[i] != '\"')
+		{
+			result[j++] = str[i];
+		}
+		i++;
+	}
+	result[j] = '\0';
 	return (result);
 }

@@ -42,7 +42,7 @@ int is_builtin(const char *cmd)
 /**
  * get_env - function to get the value of an environment variable
  * @name: the name of the env variable
- * 
+ *
  * Return: the value of the env variable
 */
 char *get_env(const char *name)

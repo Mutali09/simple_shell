@@ -26,7 +26,7 @@ int execute(char *const cmd[])
 			return (0);
 		}
 		free(full_path);
-		
+
 		full_path = _which(cmd[0]);
 
 		if (full_path == NULL)

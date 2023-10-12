@@ -35,7 +35,7 @@ int _atoi(char *s)
  * @str1: the first string
  * @str2: the second string
  * @n: the number of characters to compare
- * 
+ *
  * Return: 0 if the strings are equal
 */
 int str_cmp(const char *str1, const char *str2, size_t n)
@@ -51,7 +51,7 @@ int str_cmp(const char *str1, const char *str2, size_t n)
 	{
 		if (str1[i] != str2[i] || *str1 == '\0' || *str2 == '\0')
 		{
-			return (unsigned char)str1[i] - (unsigned char)str2[i];
+			return ((unsigned char)str1[i] - (unsigned char)str2[i]);
 		}
 	}
 	return (0);
@@ -60,7 +60,7 @@ int str_cmp(const char *str1, const char *str2, size_t n)
  * *_strcat - function to concatenate two strings
  * @dest: the destination string
  * @src: the source string
- * 
+ *
  * Return: a pointer to the destination string
 */
 char *_strcat(char *dest, const char *src)
@@ -86,14 +86,14 @@ char *_strcat(char *dest, const char *src)
  * @dest: the destination string
  * @src: the source string
  * @n: limiter for the number of characters to copy
- * 
+ *
  * Return: a pointer to the copied string
 */
 char *str_cpy(char *dest, const char *src, size_t n)
 {
 	size_t i = 0;
 
-	while(src[i] != '\0' && i < n)
+	while (src[i] != '\0' && i < n)
 	{
 		dest[i] = src[i];
 		i++;

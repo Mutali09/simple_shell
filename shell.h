@@ -68,6 +68,7 @@ char *read_input(void);
 char *remove_comments(const char *str);
 char *remove_spaces(const char *str);
 char *remove_comments_spaces(const char *str);
+char *remove_quotes(const char *str);
 
 
 /* signal.c */
