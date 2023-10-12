@@ -42,6 +42,7 @@ char **tokenize_path(const char *path)
 		token = strtok(NULL, ":");
 	}
 	tokens[i] = NULL;
+	
 	/* free(path_copy); */
 	return (tokens);
 }

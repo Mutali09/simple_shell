@@ -93,6 +93,7 @@ char **tokenize_input(char *input);
 
 void manual_free(char **str);
 int is_builtin(const char *cmd);
+char *get_env(const char *name);
 
 
 #endif /* SHELL_H */

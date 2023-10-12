@@ -7,10 +7,9 @@
 */
 char *_which(const char *cmd)
 {
-	char *cwd, *full_cwd, **tokens, *full_path;
+	char *cwd, *full_cwd, **tokens, *full_path = NULL;
 	int i;
 
-	printf("_which CMD: %s\n", cmd);
 	cwd = getcwd(NULL, 0);
 	if (cwd != NULL)
 	{
@@ -27,16 +26,14 @@ char *_which(const char *cmd)
 		if (file_exists(full_cwd) && is_executable(full_cwd))
 		{
 			free(cwd);
-			printf("_which Current Full PATH: %s\n", full_cwd);
 			return (full_cwd);
 		}
 		free(full_cwd), free(cwd);
 	}
-	tokens = tokenize_path(getenv("PATH"));
+	tokens = tokenize_path(get_env("PATH"));
 	for (i = 0; tokens[i] != NULL; i++)
 	{
-		printf("Token: %s\n", tokens[i]);
-		full_path = malloc(strlen(tokens[i]) + 1 + strlen(cmd) + 1);
+		full_path = malloc(strlen(tokens[i]) + 1 + strlen(cmd) + 2);
 		if (full_path == NULL)
 		{
 			free(tokens);
@@ -48,11 +45,9 @@ char *_which(const char *cmd)
 		if (file_exists(full_path) && is_executable(full_path))
 		{
 			free(tokens);
-			printf("Full PATH: %s\n", full_path);
 			return (full_path);
 		}
-		free(full_path);
 	}
-	free(tokens);
+	free(tokens), free(full_path);
 	return (NULL);
 }

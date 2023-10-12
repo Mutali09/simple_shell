@@ -27,7 +27,6 @@ int execute(char *const cmd[])
 		}
 		free(full_path);
 		
-		printf("execute_CMD: %s\n", cmd[0]);
 		full_path = _which(cmd[0]);
 
 		if (full_path == NULL)

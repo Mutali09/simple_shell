@@ -39,3 +39,29 @@ int is_builtin(const char *cmd)
 	}
 	return (0);
 }
+/**
+ * get_env - function to get the value of an environment variable
+ * @name: the name of the env variable
+ * 
+ * Return: the value of the env variable
+*/
+char *get_env(const char *name)
+{
+	int i = 0;
+	char **env;
+	char *delimiter;
+
+	for (; environ[i] != NULL; i++)
+	{
+		env = environ;
+		delimiter = strchr(env[i], '=');
+		if (delimiter != NULL)
+		{
+			if (strncmp(env[i], name, delimiter - env[i]) == 0)
+			{
+				return (delimiter + 1);
+			}
+		}
+	}
+	return (NULL);
+}
