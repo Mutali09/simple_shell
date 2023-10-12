@@ -3,10 +3,12 @@
  * main - this is the main function
  * Return: Always 0 for success
  */
-int main(void)
+int main(int argc, char *argv[])
 {
 	char *input, *result, **cmd;
 	int mode;
+
+	UNUSED(argc);
 
 	signal(SIGINT, get_sig);
 	signal(SIGQUIT, get_quit);
@@ -35,7 +37,7 @@ int main(void)
 			}
 			else
 			{
-			execute(cmd);
+			execute(cmd, argv[0]);
 			manual_free(cmd), free(result);
 			}
 		}

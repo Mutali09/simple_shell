@@ -5,7 +5,7 @@
  *
  * Return: status of the exectution
 */
-int execute(char *const cmd[])
+int execute(char *const cmd[], const char *shell_name)
 {
 	int status;
 	char *full_path = NULL;
@@ -31,7 +31,8 @@ int execute(char *const cmd[])
 
 		if (full_path == NULL)
 		{
-			print_error("Full_path null: Command not found");
+			print_err(shell_name), print_err(": 1: ");
+			print_err(cmd[0]), print_err(": "), print_err("not found\n");
 			return (EXIT_FAILURE);
 		}
 	}

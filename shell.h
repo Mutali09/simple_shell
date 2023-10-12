@@ -39,7 +39,7 @@ typedef struct builtin_command
 
 
 /* execute.c */
-int execute(char *const cmd[]);
+int execute(char *const cmd[], const char *shell_name);
 int is_full_path(const char *cmd);
 int execute_command(const char *full_path, char *const args[]);
 int execute_builtin(const char *cmd);
@@ -62,6 +62,7 @@ char *_which(const char *cmd);
 int _putchar(char c);
 int print_s(char *str);
 void print_error(const char *message);
+void print_err(const char *message);
 
 /* reader.c */
 char *read_input(void);
