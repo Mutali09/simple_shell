@@ -77,10 +77,11 @@ int determine_mode(void);
 
 /* string.c */
 int _atoi(char *s);
+int str_cmp(const char *str1, const char *str2, size_t n);
 
 /* strings.c */
 char *_strchr(const char *s, int c);
-int _strcmp(char *str1, char *str2);
+int _strcmp(const char *str1, const char *str2);
 char *_strcpy(char *dest, char *src);
 char *_strdup(const char *str);
 int _strlen(const char *s);

@@ -26,7 +26,7 @@ char *_strchr(const char *s, int c)
  * Return: 0 if the strings are equal
  *
  */
-int _strcmp(char *str1, char *str2)
+int _strcmp(const char *str1, const char *str2)
 {
 	while (*str1 != '\0' && *str1 == *str2)
 	{

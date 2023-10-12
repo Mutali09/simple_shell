@@ -32,7 +32,7 @@ int is_builtin(const char *cmd)
 	};
 	for (i = 0; builtin_commands[i] != NULL; i++)
 	{
-		if (strcmp(cmd, builtin_commands[i]) == 0)
+		if (_strcmp(cmd, builtin_commands[i]) == 0)
 		{
 			return (1);
 		}
@@ -54,10 +54,10 @@ char *get_env(const char *name)
 	for (; environ[i] != NULL; i++)
 	{
 		env = environ;
-		delimiter = strchr(env[i], '=');
+		delimiter = _strchr(env[i], '=');
 		if (delimiter != NULL)
 		{
-			if (strncmp(env[i], name, delimiter - env[i]) == 0)
+			if (str_cmp(env[i], name, delimiter - env[i]) == 0)
 			{
 				return (delimiter + 1);
 			}
