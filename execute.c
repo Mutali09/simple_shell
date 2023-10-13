@@ -5,7 +5,7 @@
  * @shell_name: the name of the shell
  * Return: status of the exectution
 */
-int execute(char *const cmd[], const char *shell_name)
+int execute(char **cmd, const char *shell_name)
 {
 	int status, mode = determine_mode();
 	char *full_path = NULL;
@@ -21,12 +21,6 @@ int execute(char *const cmd[], const char *shell_name)
 	}
 	else
 	{
-		if (execute_builtin(cmd) == 0)
-		{
-			return (0);
-		}
-		free(full_path);
-
 		full_path = _which(cmd[0]);
 
 		if (full_path == NULL)
@@ -34,15 +28,18 @@ int execute(char *const cmd[], const char *shell_name)
 			if (mode == INTERACTIVE_MODE)
 			{
 				print_err(shell_name), print_err(": No such file or directory\n");
-				return (EXIT_FAILURE);
 			}
-			print_err(shell_name), print_err(": 1: ");
-			print_err(cmd[0]), print_err(": "), print_err("not found\n");
+			else
+			{
+				print_err(shell_name), print_err(": 1: ");
+				print_err(cmd[0]), print_err(": "), print_err("not found\n");
+			}
+			free(full_path), manual_free(cmd);
 			return (EXIT_FAILURE);
 		}
 	}
 	status = execute_command(full_path, (char *const*)cmd);
-	free(full_path);
+	free(full_path), manual_free(cmd);
 	return (status);
 }
 /**
@@ -61,13 +58,13 @@ int is_full_path(const char *cmd)
  *
  * Return: 1 to indicate builtin command execution or 0 for non_builtin
 */
-int execute_builtin(char *const cmd[])
+int execute_builtin(char **cmd)
 {
 	int i = 0;
 	const builtin_command builtins[] = {
-		{"cd", execute_cd},
+		/*{"cd", execute_cd},*/
 		{"exit", shell_exit},
-		{"env", execute_env},
+		/*{"env", execute_env},*/
 		{NULL, NULL}
 	};
 

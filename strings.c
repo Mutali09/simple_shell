@@ -91,6 +91,7 @@ char *_strdup(const char *str)
 	}
 	else
 	{
+		free(arr);
 		return (NULL);
 	}
 }

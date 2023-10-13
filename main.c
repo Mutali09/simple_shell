@@ -34,14 +34,18 @@ int main(int argc, char *argv[])
 		{
 			if (is_builtin(cmd[0]))
 			{
+				free(result), free(input);
 				execute_builtin(cmd);
-				manual_free(cmd), free(result);
 			}
 			else
 			{
 			execute(cmd, argv[0]);
-			manual_free(cmd), free(result);
+			free(result);
 			}
+		}
+		else
+		{
+			free(result), manual_free(cmd);
 		}
 		free(input);
 	}

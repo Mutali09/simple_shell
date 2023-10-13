@@ -43,7 +43,7 @@ char **tokenize_path(const char *path)
 	}
 	tokens[i] = NULL;
 
-	/* free(path_copy); */
+	free(path_copy);
 	return (tokens);
 }
 /**

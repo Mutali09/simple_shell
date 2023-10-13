@@ -30,10 +30,10 @@ char *_which(const char *cmd)
 	tokens = tokenize_path(get_env("PATH"));
 	for (i = 0; tokens[i] != NULL; i++)
 	{
-		full_path = malloc(_strlen(tokens[i]) + 1 + _strlen(cmd) + 2);
+		full_path = malloc(strlen(tokens[i]) + 1 + strlen(cmd) + 1);
 		if (full_path == NULL)
 		{
-			free(tokens);
+			free(tokens), free(full_path);
 			return (NULL);
 		}
 		_strcpy(full_path, tokens[i]);
@@ -44,7 +44,8 @@ char *_which(const char *cmd)
 			free(tokens);
 			return (full_path);
 		}
+		free(full_path);
 	}
-	free(tokens), free(full_path);
+	free(tokens);
 	return (NULL);
 }

@@ -24,20 +24,20 @@ void execute_env(char *const cmd[])
  * @cmd: the arguments to be passed
  * Return: none
  */
-void shell_exit(char *const cmd[])
+void shell_exit(char **cmd)
 {
 	int status;
 
 	if (cmd[1] != NULL)
 	{
 		status = _atoi(cmd[1]);
-
-		exit(status);
 	}
 	else
 	{
-		exit(0);
+		status = 0;
 	}
+	manual_free(cmd);
+	exit(status);
 }
 /**
  * change_directory - function to change the current directory
