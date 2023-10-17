@@ -61,7 +61,7 @@ int change_directory(const char *new_dir)
  *
  * Return: None
  */
-void execute_cd(char *const cmd[])
+void execute_cd(char **cmd)
 {
 	const char *new_dir;
 	char *current_dir;
@@ -91,7 +91,7 @@ void execute_cd(char *const cmd[])
 	{
 		update_env_variables(current_dir, new_dir);
 	}
-	free(current_dir);
+	free(current_dir), manual_free(cmd);
 }
 /**
  * update_env_variables - function to upadate the PWD and OLDPWD env variables

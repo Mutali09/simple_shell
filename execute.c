@@ -62,7 +62,7 @@ int execute_builtin(char **cmd)
 {
 	int i = 0;
 	const builtin_command builtins[] = {
-		/*{"cd", execute_cd},*/
+		{"cd", execute_cd},
 		{"exit", shell_exit},
 		{"env", execute_env},
 		{NULL, NULL}
@@ -98,7 +98,7 @@ int execute_command(const char *full_path, char *const args[])
 
 	if (pid == 0)
 	{
-		if (execve(full_path, args, NULL) == -1)
+		if (execve(full_path, args, environ) == -1)
 		{
 			perror("execve");
 			exit(EXIT_FAILURE);

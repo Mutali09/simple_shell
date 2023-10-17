@@ -52,7 +52,7 @@ int is_executable(const char *path);
 void execute_env(char **cmd);
 void shell_exit(char **cmd);
 int change_directory(const char *new_dir);
-void execute_cd(char *const cmd[]);
+void execute_cd(char **cmd);
 void update_env_variables(const char *old_dir, const char *new_dir);
 
 /* path.c */
