@@ -11,8 +11,7 @@ int main(int argc, char *argv[])
 	int mode;
 
 	UNUSED(argc);
-	signal(SIGINT, get_sig);
-	/* signal(SIGQUIT, get_quit); */
+	signal(SIGINT, get_sig); /* signal(SIGQUIT, get_quit); */
 	mode = determine_mode();
 
 	while (1)
