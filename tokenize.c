@@ -38,12 +38,12 @@ char **tokenize_path(const char *path)
 
 	while (token != NULL)
 	{
-		tokens[i++] = token;
+		tokens[i++] = _strdup(token);
 		token = strtok(NULL, ":");
 	}
 	tokens[i] = NULL;
 
-	/* free(path_copy); */
+	free(path_copy);
 	return (tokens);
 }
 /**
@@ -73,7 +73,7 @@ char **tokenize_input(char *input)
 	cmd = malloc(sizeof(char *) * (size + 2));
 	if (cmd == NULL)
 	{
-		free(input_copy);
+		free(input_copy), manual_free(cmd);
 		return (NULL);
 	}
 	token = strtok(input_copy, " \n\t\r");

@@ -40,11 +40,11 @@ char *_which(const char *cmd)
 		_strcat(full_path, cmd);
 		if (file_exists(full_path) && is_executable(full_path))
 		{
-			free(tokens);
+			manual_free(tokens);
 			return (full_path);
 		}
 		free(full_path);
 	}
-	free(tokens);
+	manual_free(tokens);
 	return (NULL);
 }

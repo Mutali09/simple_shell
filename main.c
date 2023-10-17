@@ -19,10 +19,14 @@ int main(int argc, char *argv[])
 	{
 		if (mode == INTERACTIVE_MODE)
 		{
-			print_s(PROMPT);
-			fflush(stdout);
+			print_s(PROMPT), fflush(stdout);
 		}
 		input = read_input();
+		if (input == NULL || input[0] == '\0')
+		{
+			free(input);
+			continue;
+		}
 		result = remove_comments_spaces(input);
 		cmd = tokenize_input(result);
 
@@ -30,13 +34,11 @@ int main(int argc, char *argv[])
 		{
 			if (is_builtin(cmd[0]))
 			{
-				free(result), free(input);
-				execute_builtin(cmd);
+				free(result), free(input), execute_builtin(cmd);
 			}
 			else
 			{
-			execute(cmd, argv[0]);
-			free(result);
+			execute(cmd, argv[0]), free(result), free(input);
 			}
 		}
 		else
@@ -44,6 +46,5 @@ int main(int argc, char *argv[])
 			free(result), manual_free(cmd), free(input);
 		}
 	}
-
 	return (0);
 }
