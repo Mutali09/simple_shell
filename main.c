@@ -11,10 +11,8 @@ int main(int argc, char *argv[])
 	int mode;
 
 	UNUSED(argc);
-
 	signal(SIGINT, get_sig);
 	signal(SIGQUIT, get_quit);
-
 	mode = determine_mode();
 
 	while (1)
@@ -25,9 +23,7 @@ int main(int argc, char *argv[])
 			fflush(stdout);
 		}
 		input = read_input();
-
 		result = remove_comments_spaces(input);
-
 		cmd = tokenize_input(result);
 
 		if (cmd != NULL && cmd[0] != NULL)
