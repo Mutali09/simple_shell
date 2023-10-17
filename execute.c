@@ -31,6 +31,7 @@ int execute(char **cmd, const char *shell_name)
 	else
 	{
 		full_path = _which(cmd[0]);
+		printf("executin: %s\n", cmd[0]);
 
 		if (full_path == NULL)
 		{
@@ -51,7 +52,7 @@ int execute(char **cmd, const char *shell_name)
 */
 int is_full_path(char *cmd)
 {
-	return (cmd != NULL && cmd[0] == '/') || (cmd[0] == '.');
+	return ((cmd != NULL && cmd[0] == '/') || (cmd[0] == '.'));
 }
 /**
  * execute_builtin - function to help in the execution of builtin functions

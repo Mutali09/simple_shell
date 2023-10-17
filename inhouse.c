@@ -47,10 +47,13 @@ void shell_exit(char **cmd)
 			status = 2;
 			break;
 		}
+		else
+		{
+			status = _atoi(cmd[1]);
+			manual_free(cmd);
+			exit(status);
+		}
 	}
-	status = _atoi(cmd[1]);
-	manual_free(cmd);
-	exit(status);
 }
 /**
  * change_directory - function to change the current directory
