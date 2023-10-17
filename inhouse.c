@@ -28,29 +28,23 @@ void shell_exit(char **cmd)
 {
 	int status = 0, i;
 
-	if (cmd[1] != NULL)
+	if (cmd[1] == NULL)
 	{
-		for (i = 1; cmd[i] != NULL; i++)
+		manual_free(cmd);
+		exit(0);
+
+	}
+	for (i = 0; cmd[1][i]; i++)
+	{
+		if (cmd[1][i] <48 || cmd[1][i] > 57)
 		{
-			if (!_isdigit(cmd[1][i]))
-			{
-				print_err("hsh : exit:"), print_err(cmd[1]);
-				print_err(": numeric argument required\n");
-				status = 2;
-				break;
-			}
-		}
-		if (status == 0)
-		{
-			status = _atoi(cmd[1]);
-			if (status < -255 || status > 255)
-			{
-				print_err("hsh : exit:"), print_err(cmd[1]);
-				print_err(": numeric argument required (0-255)\n");
-				status = 2;
-			}
+			print_err("hsh : exit:"), print_err(cmd[1]);
+			print_err(": numeric argument required\n");
+			status = 2;
+			break;
 		}
 	}
+	status = _atoi(cmd[1]);
 	manual_free(cmd);
 	exit(status);
 }
