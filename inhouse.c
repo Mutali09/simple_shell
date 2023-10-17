@@ -43,7 +43,7 @@ void shell_exit(char **cmd)
 		if (status == 0)
 		{
 			status = _atoi(cmd[1]);
-			if (status < 0 || status > 255)
+			if (status < -255 || status > 255)
 			{
 				print_err("hsh : exit:"), print_err(cmd[1]);
 				print_err(": numeric argument required (0-255)\n");
