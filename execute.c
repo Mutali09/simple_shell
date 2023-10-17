@@ -31,7 +31,6 @@ int execute(char **cmd, const char *shell_name)
 	else
 	{
 		full_path = _which(cmd[0]);
-		printf("executin: %s\n", cmd[0]);
 
 		if (full_path == NULL)
 		{
