@@ -42,8 +42,8 @@ void shell_exit(char **cmd)
 	{
 		if (cmd[1][i] < 48 || cmd[1][i] > 57)
 		{
-			print_err("hsh : exit:"), print_err(cmd[1]);
-			print_err(": numeric argument required\n");
+			print_err("hsh: 1: exit: Illegal number: "), print_err(cmd[1]);
+			print_err("\n");
 			status = 2;
 			break;
 		}
