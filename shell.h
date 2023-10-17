@@ -63,6 +63,7 @@ int _putchar(char c);
 int print_s(char *str);
 void print_error(const char *message);
 void print_err(const char *message);
+void print_error_message(const char *shell_name, char **cmd, int mode);
 
 /* reader.c */
 char *read_input(void);

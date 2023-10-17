@@ -12,7 +12,16 @@ int execute(char **cmd, const char *shell_name)
 
 	if (is_full_path(cmd[0]))
 	{
-		full_path = _strdup(cmd[0]);
+		if (file_exists(cmd[0]) && is_executable(cmd[0]))
+		{
+			full_path = _strdup(cmd[0]);
+		}
+		else
+		{
+			print_error_message(shell_name, cmd, mode);
+			free(full_path), manual_free(cmd);
+			return (EXIT_FAILURE);
+		}
 		if (full_path == NULL)
 		{
 			perror("strdup error");
@@ -25,15 +34,7 @@ int execute(char **cmd, const char *shell_name)
 
 		if (full_path == NULL)
 		{
-			if (mode == INTERACTIVE_MODE)
-			{
-				print_err(shell_name), print_err(": No such file or directory\n");
-			}
-			else
-			{
-				print_err(shell_name), print_err(": 1: ");
-				print_err(cmd[0]), print_err(": "), print_err("not found\n");
-			}
+			print_error_message(shell_name, cmd, mode);
 			free(full_path), manual_free(cmd);
 			return (EXIT_FAILURE);
 		}
