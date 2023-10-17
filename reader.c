@@ -41,7 +41,7 @@ char *remove_comments(const char *str)
 	int i = 0, j = 0;
 	char *result;
 
-	result = (char *)malloc(strlen(str) + 1);
+	result = (char *)malloc(_strlen(str) + 1);
 
 	if (!result)
 	{
@@ -138,7 +138,7 @@ char *remove_quotes(const char *str)
 	char *result;
 	int i = 0, j = 0;
 
-	result = (char *)malloc(strlen(str) + 1);
+	result = (char *)malloc(_strlen(str) + 1);
 
 	if (!result)
 	{
