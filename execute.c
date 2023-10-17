@@ -15,7 +15,8 @@ int execute(char **cmd, const char *shell_name)
 		full_path = _strdup(cmd[0]);
 		if (full_path == NULL)
 		{
-			perror("strdup error");
+			print_err(shell_name), print_err(": 1: ");
+			print_err(cmd[0]), print_err(": "), print_err("not found\n");
 			return (EXIT_FAILURE);
 		}
 	}
@@ -85,7 +86,7 @@ int execute_builtin(char **cmd)
  *
  * Return: status of the execution
 */
-int execute_command(const char *full_path, char *const args[])
+int execute_command(char *full_path, char *const args[])
 {
 	int status;
 	pid_t pid = fork();

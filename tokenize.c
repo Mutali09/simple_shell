@@ -5,7 +5,7 @@
  *
  * Return: pointer to the array of tokens
 */
-char **tokenize_path(const char *path)
+char **tokenize_path(char *path)
 {
 	char **tokens, *token, *path_copy = NULL;
 	const char *ptr;
@@ -16,7 +16,6 @@ char **tokenize_path(const char *path)
 	{
 		return (NULL);
 	}
-
 	for (ptr = path_copy; *ptr != '\0'; ++ptr)
 	{
 		if (*ptr == ':')
@@ -29,12 +28,12 @@ char **tokenize_path(const char *path)
 
 	if (tokens == NULL)
 	{
-		perror("malloc error");
 		free(path_copy);
+		perror("malloc error");
 		return (NULL);
 	}
 
-	token = strtok((char *)path_copy, ":");
+	token = strtok(path_copy, ":");
 
 	while (token != NULL)
 	{
@@ -42,8 +41,6 @@ char **tokenize_path(const char *path)
 		token = strtok(NULL, ":");
 	}
 	tokens[i] = NULL;
-
-	/* free(path_copy); */
 	return (tokens);
 }
 /**
@@ -54,42 +51,45 @@ char **tokenize_path(const char *path)
 
 char **tokenize_input(char *input)
 {
-	char **cmd = NULL;
-	char *token = NULL;
+	char **cmd = NULL, *token = NULL, *delimiter, *input_copy = _strdup(input);
 	size_t i = 0;
 	int size = 0;
-	char *input_copy = _strdup(input);
 
 	if (input_copy == NULL)
 	{
 		return (NULL);
+	}
+	if (_strchr(input_copy, ';') != NULL)
+	{
+		delimiter = " ;";
+	}
+	else
+	{
+		delimiter = " \n\t\r";
 	}
 	for (i = 0; input_copy[i]; i++)
 	{
 		if (input_copy[i] == ' ')
 			size++;
 	}
-
 	cmd = malloc(sizeof(char *) * (size + 2));
 	if (cmd == NULL)
 	{
 		free(input_copy);
 		return (NULL);
 	}
-	token = strtok(input_copy, " \n\t\r");
+	token = strtok(input_copy, delimiter);
 	for (i = 0; token != NULL; i++)
 	{
 		cmd[i] = _strdup(token);
 		if (cmd[i] == NULL)
 		{
-			manual_free(cmd);
-			free(input_copy);
+			manual_free(cmd), free(input_copy);
 			return (NULL);
 		}
-		token = strtok(NULL, " \n\t\r");
+		token = strtok(NULL, delimiter);
 	}
 	cmd[i] = NULL;
-
 	free(input_copy);
 	return (cmd);
 }

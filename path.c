@@ -47,5 +47,6 @@ char *_which(const char *cmd)
 		free(full_path);
 	}
 	free(tokens);
+	manual_free(tokens);
 	return (NULL);
 }

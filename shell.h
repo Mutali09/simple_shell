@@ -41,7 +41,7 @@ typedef struct builtin_command
 /* execute.c */
 int execute(char **cmd, const char *shell_name);
 int is_full_path(const char *cmd);
-int execute_command(const char *full_path, char *const args[]);
+int execute_command(char *full_path, char *const args[]);
 int execute_builtin(char **cmd);
 
 /* filecheck.c */
@@ -91,7 +91,7 @@ char *_strdup(const char *str);
 int _strlen(const char *s);
 
 /* tokenize.c */
-char **tokenize_path(const char *path);
+char **tokenize_path(char *path);
 char **tokenize_input(char *input);
 
 /* utils.c */
