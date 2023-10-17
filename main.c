@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
 	UNUSED(argc);
 	signal(SIGINT, get_sig);
-	signal(SIGQUIT, get_quit);
+	/* signal(SIGQUIT, get_quit); */
 	mode = determine_mode();
 
 	while (1)
