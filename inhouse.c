@@ -31,6 +31,10 @@ void shell_exit(char **cmd)
 	if (cmd[1] != NULL)
 	{
 		status = _atoi(cmd[1]);
+		if (status <= -1)
+		{
+			status = 2;
+		}
 	}
 	else
 	{
