@@ -14,6 +14,7 @@ char **tokenize_path(const char *path)
 	path_copy = _strdup(path);
 	if (path_copy == NULL)
 	{
+		free(path_copy);
 		return (NULL);
 	}
 
@@ -62,6 +63,7 @@ char **tokenize_input(char *input)
 
 	if (input_copy == NULL)
 	{
+		free(input_copy);
 		return (NULL);
 	}
 	for (i = 0; input_copy[i]; i++)

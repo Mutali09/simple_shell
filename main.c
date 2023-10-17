@@ -46,5 +46,6 @@ int main(int argc, char *argv[])
 			free(result), manual_free(cmd), free(input);
 		}
 	}
+	free(input);
 	return (0);
 }

@@ -20,6 +20,7 @@ char *read_input(void)
 			write(STDERR_FILENO, "\n", 1);
 			free(input);
 		}
+		free(input);
 		exit(0);
 	}
 	/* Removing the newline char if present*/
@@ -82,6 +83,12 @@ char *remove_spaces(const char *str)
 
 	while (*str == ' ')
 		str++;
+	if (*str == '\0')
+	{
+		empty = malloc(1);
+		empty[0] = '\0';
+		return (empty);
+	}
 
 	end = str;
 
@@ -116,10 +123,24 @@ char *remove_comments_spaces(const char *str)
 	char *result;
 
 	if (!without_comments)
+	{
+		free(without_comments);
 		return (NULL);
-
+	}
 	without_spaces = remove_spaces(without_comments);
+	if (!without_spaces || !*without_spaces)
+	{
+		free(without_comments);
+		free(without_spaces);
+		return (NULL);
+	}
 	result = remove_quotes(without_spaces);
+	if (!result || !*result)
+	{
+		free(without_comments);
+		free(without_spaces);
+		return (NULL);
+	}
 
 	free(without_comments);
 	free(without_spaces);
