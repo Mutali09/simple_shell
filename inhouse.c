@@ -26,19 +26,30 @@ void execute_env(char **cmd)
  */
 void shell_exit(char **cmd)
 {
-	int status;
+	int status = 0, i;
 
 	if (cmd[1] != NULL)
 	{
-		status = _atoi(cmd[1]);
-		if (status <= -1)
+		for (i = 1; cmd[i] != NULL; i++)
 		{
-			status = 2;
+			if (!_isdigit(cmd[1][i]))
+			{
+				print_err("hsh : exit:"), print_err(cmd[1]);
+				print_err(": numeric argument required\n");
+				status = 2;
+				break;
+			}
 		}
-	}
-	else
-	{
-		status = 0;
+		if (status == 0)
+		{
+			status = _atoi(cmd[1]);
+			if (status < 0 || status > 255)
+			{
+				print_err("hsh : exit:"), print_err(cmd[1]);
+				print_err(": numeric argument required (0-255)\n");
+				status = 2;
+			}
+		}
 	}
 	manual_free(cmd);
 	exit(status);
