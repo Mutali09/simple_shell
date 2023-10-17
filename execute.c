@@ -20,12 +20,12 @@ int execute(char **cmd, const char *shell_name)
 		{
 			print_error_message(shell_name, cmd, mode);
 			free(full_path), manual_free(cmd);
-			return (EXIT_FAILURE);
+			return (127);
 		}
 		if (full_path == NULL)
 		{
 			perror("strdup error");
-			return (EXIT_FAILURE);
+			return (127);
 		}
 	}
 	else
@@ -51,6 +51,10 @@ int execute(char **cmd, const char *shell_name)
 */
 int is_full_path(char *cmd)
 {
+	if (cmd == NULL)
+	{
+		return (0);
+	}
 	return ((cmd != NULL && cmd[0] == '/') || (cmd[0] == '.'));
 }
 /**
@@ -94,15 +98,15 @@ int execute_command(const char *full_path, char *const args[])
 	if (pid == -1)
 	{
 		perror("fork");
-		return (EXIT_FAILURE);
+		return (127);
 	}
 
 	if (pid == 0)
 	{
 		if (execve(full_path, args, environ) == -1)
 		{
-			perror("execve");
-			exit(EXIT_FAILURE);
+			perror("execve: ");
+			exit(2);
 		}
 	}
 	else
@@ -115,8 +119,8 @@ int execute_command(const char *full_path, char *const args[])
 		else
 		{
 			print_error("Child process did not terminate normally");
-			return (EXIT_FAILURE);
+			return (127);
 		}
 	}
-	return (EXIT_FAILURE);
+	return (127);
 }

@@ -33,7 +33,7 @@ char *_which(const char *cmd)
 		full_path = malloc(_strlen(tokens[i]) + 1 + _strlen(cmd) + 1);
 		if (full_path == NULL)
 		{
-			free(tokens), free(full_path);
+			manual_free(tokens), free(full_path);
 			return (NULL);
 		}
 		_strcpy(full_path, tokens[i]), _strcat(full_path, "/");

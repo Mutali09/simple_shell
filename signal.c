@@ -8,7 +8,7 @@
 void get_sig(int sig)
 {
 	UNUSED(sig);
-	write(STDOUT_FILENO, "\n$ ", 3);
+	write(STDOUT_FILENO, "#cisfun$ ", 9);
 }
 /**
  * get_quit - function to get a Ctrl + D signal

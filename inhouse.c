@@ -44,7 +44,6 @@ void shell_exit(char **cmd)
 		{
 			print_err("./hsh: 1: exit: Illegal number: "), print_err(cmd[1]);
 			print_err("\n");
-			status = 2;
 			manual_free(cmd);
 			break;
 		}

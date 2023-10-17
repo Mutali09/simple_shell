@@ -2,3 +2,6 @@
 *hsh
 *.o
 *.out
+TEST_SUITES
+allowed_functions
+runchecker.bash
