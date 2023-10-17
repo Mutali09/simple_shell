@@ -78,7 +78,7 @@ char *remove_comments(const char *str)
 char *remove_spaces(const char *str)
 {
 	const char *end;
-	char *trimmed;
+	char *trimmed, *empty;
 	size_t len;
 
 	while (*str == ' ')
