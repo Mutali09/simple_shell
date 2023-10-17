@@ -98,7 +98,7 @@ int execute_command(const char *full_path, char *const args[])
 
 	if (pid == 0)
 	{
-		if (execve(full_path, args, environ) == -1)
+		if (execve(full_path, args, NULL) == -1)
 		{
 			perror("execve");
 			exit(EXIT_FAILURE);
