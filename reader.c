@@ -8,7 +8,7 @@ char *read_input(void)
 {
 	char *input = NULL;
 	size_t input_size = 0;
-	ssize_t input_len;
+	ssize_t input_len, i;
 	int mode = determine_mode();
 
 	input_len = getline(&input, &input_size, stdin);
@@ -22,7 +22,13 @@ char *read_input(void)
 		}
 		exit(0);
 	}
-
+	for (i = 0; i < input_len; i++)
+	{
+		if (input[i] == ';')
+		{
+			input[i] = '\n';
+		}
+	}
 	/* Removing the newline char if present*/
 	if (input_len > 0 && input[input_len - 1] == '\n')
 	{

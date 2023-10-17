@@ -40,7 +40,7 @@ typedef struct builtin_command
 
 /* execute.c */
 int execute(char **cmd, const char *shell_name);
-int is_full_path(const char *cmd);
+int is_full_path(char *cmd);
 int execute_command(const char *full_path, char *const args[]);
 int execute_builtin(char **cmd);
 

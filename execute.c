@@ -49,9 +49,9 @@ int execute(char **cmd, const char *shell_name)
  *
  * Return: status of the execution
 */
-int is_full_path(const char *cmd)
+int is_full_path(char *cmd)
 {
-	return (_strchr(cmd, '/') != NULL);
+	return (cmd != NULL && cmd[0] == '/') || (cmd[0] == '.');
 }
 /**
  * execute_builtin - function to help in the execution of builtin functions
