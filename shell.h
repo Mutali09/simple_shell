@@ -49,7 +49,7 @@ int file_exists(const char *path);
 int is_executable(const char *path);
 
 /* inhouse.c */
-void execute_env(char *const cmd[]);
+void execute_env(char **cmd);
 void shell_exit(char **cmd);
 int change_directory(const char *new_dir);
 void execute_cd(char *const cmd[]);

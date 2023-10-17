@@ -4,11 +4,11 @@
  * @cmd: included to match the struct. Not used for this function
  * Return: none
  */
-void execute_env(char *const cmd[])
+void execute_env(char **cmd)
 {
 	char **env;
 
-	UNUSED(cmd);
+	manual_free(cmd);
 
 	env = environ;
 

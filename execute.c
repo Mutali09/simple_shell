@@ -64,7 +64,7 @@ int execute_builtin(char **cmd)
 	const builtin_command builtins[] = {
 		/*{"cd", execute_cd},*/
 		{"exit", shell_exit},
-		/*{"env", execute_env},*/
+		{"env", execute_env},
 		{NULL, NULL}
 	};
 
