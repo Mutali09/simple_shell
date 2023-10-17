@@ -16,7 +16,7 @@
 #define BUFFER_SIZE 1024
 #define INTERACTIVE_MODE 1
 #define NON_INTERACTIVE_MODE 0
-#define PROMPT "#cisfun$"
+#define PROMPT "#cisfun$ "
 #define UNUSED(x) (void)(x)
 
 /* Envrionment Definitions*/
